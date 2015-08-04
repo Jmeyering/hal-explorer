@@ -17,6 +17,9 @@
         "phpspec/phpspec": "^2.2",
         "apigen/apigen": "^4.1"
     },
+    "suggest": {
+        "guzzlehttp/guzzle": "^6.0"
+    },
     "autoload": {
         "psr-4": {
             "HalExplorer\\": "src/"
