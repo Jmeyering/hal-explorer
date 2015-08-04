@@ -18,7 +18,7 @@
         "apigen/apigen": "^4.1"
     },
     "suggest": {
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "PSR7 HTTP Client that works with the default adapter"
     },
     "autoload": {
         "psr-4": {
