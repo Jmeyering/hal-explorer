@@ -2,11 +2,15 @@
 
 [![Build Status](https://travis-ci.org/Jmeyering/hal-explorer.svg?branch=master)](https://travis-ci.org/Jmeyering/hal-explorer)
 
+
 HalExplorer is a php client useful for exploring [HAL][1] formatted apis.
 HalExplorer is able to craft requests and follow links to retreive, create,
 update and delete resource relationships.
 
 The codebase is fully covered by phpspec and extensively documented.
+
+## Install
+`composer require jmeyering/hal-explorer`
 
 ## Spec Tests
 Phpspec is included with the composer deps so running the test suite simply
