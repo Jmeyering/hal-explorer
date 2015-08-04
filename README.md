@@ -1,5 +1,7 @@
 # hal-explorer: Hateoas Api explorer.
 
+[![Build Status](https://travis-ci.org/Jmeyering/hal-explorer.svg?branch=master)](https://travis-ci.org/Jmeyering/hal-explorer)
+
 HalExplorer is a php client useful for exploring [HAL][1] formatted apis.
 HalExplorer is able to craft requests and follow links to retreive, create,
 update and delete resource relationships.
