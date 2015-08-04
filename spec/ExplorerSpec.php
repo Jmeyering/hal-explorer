@@ -2,7 +2,6 @@
 
 namespace spec\HalExplorer;
 
-use GuzzleHttp\Client;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
@@ -93,8 +92,7 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_be_able_to_retreive_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
-        ResponseInterface $response,
-        Client $client
+        ResponseInterface $response
     )
     {
         $this->setBaseUrl($this->baseUrl);;
@@ -110,8 +108,7 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_be_able_to_create_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
-        ResponseInterface $response,
-        Client $client
+        ResponseInterface $response
     )
     {
         $this->setBaseUrl($this->baseUrl);;
@@ -127,8 +124,7 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_be_able_to_update_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
-        ResponseInterface $response,
-        Client $client
+        ResponseInterface $response
     )
     {
         $this->setBaseUrl($this->baseUrl);;
@@ -144,8 +140,7 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_be_able_to_delete_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
-        ResponseInterface $response,
-        Client $client
+        ResponseInterface $response
     )
     {
         $this->setBaseUrl($this->baseUrl);;
@@ -161,8 +156,7 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_when_no_link_exists_and_we_ask_it_to_follow_it(
         AdapterInterface $adapter,
-        ResponseInterface $response,
-        Client $client
+        ResponseInterface $response
     )
     {
         $this->setBaseUrl($this->baseUrl);;

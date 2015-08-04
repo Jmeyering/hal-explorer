@@ -14,8 +14,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^2.2",
-        "apigen/apigen": "^4.1",
-        "guzzlehttp/guzzle": "^6.0"
+        "apigen/apigen": "^4.1"
     },
     "autoload": {
         "psr-4": {
