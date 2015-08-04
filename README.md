@@ -37,8 +37,67 @@ methods.
 $explorer->createRelation($object, "association");
 ```
 
-This method will craft a post request to whatever link href is contained in the
-`$oject` response identified by `association`.
+## Example
+We will use the [heroku haltalk][2] api as an endpoint example and
+guzzlehttp/guzzle for our HTTP Client.
 
-[0]: http://www.php-fig.org/psr/psr-7/
+```php
+// This Example creates a new account with haltalk and creates a post from that
+// account.
+$client = new \GuzzleHttp\Client();
+$explorer = new \HalExplorer\Explorer();
+$adapter = new \HalExplorer\ClientAdapters\Adapter();
+
+$adapter->setClient($client);
+$explorer->setAdapter($adapter)->setBaseUrl("http://haltalk.herokuapp.com");
+
+// The haltalk api requires both "application/hal+json" and, application/json"
+// Accept headers to work. hal-explorer only adds "application/hal+json" by
+// default so we need to override this default value.
+$explorer->setDefaults(function($original){
+    $original["headers"]["Accept"] = "application/hal+json, application/json";
+
+    return $original;
+});
+
+$username = "myuniqueusername";
+
+// Enter the haltalk api and return a PSR7 ResponseInterface
+$entrypoint = $explorer->enter();
+
+// Create an account with haltalk.
+$accountResponse = $explorer->createRelation($entrypoint, "signup", [
+    "body" => '{
+        "username": "'.$username.'",
+        "password": "password"
+    }'
+]);
+
+// Retreive my account information using thy "me" link on the entrypoint.
+// Because this is a templated link, we must pass templated data along.
+$myAccount = $explorer->getRelation($entrypoint, "me", [
+    "template" => [
+        "name" => $username,
+    ],
+]);
+
+// Create a post from my account. This resource requires basic auth.
+$post = $explorer->createRelation($myAccount, "posts", [
+    "body" => '{
+        "content": "This is my post Content"
+    }',
+    "auth" => [
+        $username,
+        "password"
+    ]
+]);
+
+// Haltalk return the post location in a response header. We can fetch that
+// information using the PSR7 method, getHeaderLine()
+$postLocation = $post->getHeaderLine("location");
+```
+
+[0]: http://www.php-fig.org/psr/psr-7
 [1]: http://stateless.co/hal_specification.html
+[2]: http://haltalk.herokuapp.com/explorer/browser.html
+

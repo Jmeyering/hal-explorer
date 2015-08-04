@@ -27,9 +27,16 @@ class ExplorerSpec extends ObjectBehavior
 
     function it_should_set_and_retreive_a_base_url()
     {
-        $baseurl = "http://github.com";
-        $this->setBaseUrl($baseurl);
-        $this->getBaseUrl()->shouldBeEqualTo($baseurl);
+        $this->setBaseUrl($this->baseUrl);
+        $this->getBaseUrl()->shouldBeEqualTo($this->baseUrl);
+    }
+
+    function it_should_be_able_to_enter_the_entrypoint_of_the_api(AdapterInterface $adapter)
+    {
+
+        $this->setBaseUrl($this->baseUrl)->setAdapter($adapter);
+        $adapter->get($this->baseUrl . "/", Argument::type("array"))->shouldBeCalled();
+        $this->enter();
     }
 
     function it_should_be_able_to_make_all_requests_to_an_api(AdapterInterface $adapter)
@@ -43,7 +50,7 @@ class ExplorerSpec extends ObjectBehavior
         }
     }
 
-    function it_should_be_able_to_set_authorization_via_the_auth_closure(AdapterInterface $adapter)
+    function it_should_be_able_to_set_defaults_via_the_auth_closure(AdapterInterface $adapter)
     {
 
         $expected = [
@@ -52,7 +59,7 @@ class ExplorerSpec extends ObjectBehavior
             ],
         ];
 
-        $this->setAdapter($adapter)->setAuth(function($options) use ($expected) {
+        $this->setAdapter($adapter)->setDefaults(function($options) use ($expected) {
             return $expected;
         });
 
@@ -67,7 +74,7 @@ class ExplorerSpec extends ObjectBehavior
             ],
         ];
 
-        $this->setAuth(function($options) use ($expected) {
+        $this->setDefaults(function($options) use ($expected) {
             return $expected;
         });
 
@@ -167,4 +174,5 @@ class ExplorerSpec extends ObjectBehavior
         $this->shouldThrow("HalExplorer\Exceptions\LinkNotFoundException")
             ->during("getRelation", [$response, "notalink"]);
     }
+
 }

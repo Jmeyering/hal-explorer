@@ -20,6 +20,10 @@
         "self": {
             "title": "A Self Referencing Link",
             "href": "/self/123"
+        },
+        "templated": {
+            "title": "A templated Link",
+            "href": "/place/{name}"
         }
     },
     "_embedded": {

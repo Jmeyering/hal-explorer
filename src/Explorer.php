@@ -3,6 +3,7 @@
 namespace HalExplorer;
 
 use HalExplorer\Hypermedia\Parser as HypermediaParser;
+use HalExplorer\Hypermedia\UriTemplate;
 use HalExplorer\ClientAdapters\ClientAdapterInterface;
 use HalExplorer\Exceptions\LinkNotFoundException;
 use Psr\Http\Message\ResponseInterface;
@@ -46,12 +47,22 @@ class Explorer
     protected $adapter;
 
     /**
-     * How to add authorization to the request options
+     * How to add default values to the currently established
      *
      * @var Closure
      */
-    protected $auth;
+    protected $defaults;
 
+
+    /**
+     * Make a request to the entrypoint of the api.
+     *
+     * @return ResponseInterface
+     */
+    public function enter(array $options = [])
+    {
+        return $this->makeRequest("get", "/", $options);
+    }
 
     /**
      * Make a request to the api. Automatically adds default options to the
@@ -197,7 +208,13 @@ class Explorer
             throw new LinkNotFoundException("Link \"{$id}\" not found in response");
         }
 
-        return $this->makeRequest($method, $link->href, $options);
+        $href = $link->href;
+        if (property_exists($link, "templated") && $link->templated) {
+            $uriTemplate = new UriTemplate();
+            $href = $uriTemplate->template($href, $options["template"]);
+        }
+
+        return $this->makeRequest($method, $href, $options);
     }
 
     /**
@@ -225,16 +242,17 @@ class Explorer
     }
 
     /**
-     * Set auth
+     * Modify the existing defaults array. To meet your needs.
      *
      * @param Closure the closure should accept a single array paramater which
-     * is the default options array for the http request.
+     * is the library default options array for the http request. Modify it or
+     * trash it I don't care.
      *
      * @return self
      */
-    public function setAuth(\Closure $auth)
+    public function setDefaults(\Closure $auth)
     {
-        $this->auth = $auth;
+        $this->defaults = $auth;
 
         return $this;
     }
@@ -272,12 +290,17 @@ class Explorer
     {
         $defaults = [
             "query" => [],
+            "headers" => [
+                "Content-Type" => "application/json",
+                "Accept" => "application/hal+json",
+            ],
         ];
 
-        if (!empty($this->auth)) {
-            $defaults = call_user_func($this->auth, $defaults);
+        if (!empty($this->defaults)) {
+            $defaults = call_user_func($this->defaults, $defaults);
         }
 
         return $defaults;
     }
+
 }

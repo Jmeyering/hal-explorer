@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3845e70756acb15720904e7274d77f32",
+    "hash": "c5545446e5337965ba7da8bd03d1a3ac",
     "packages": [
         {
             "name": "psr/http-message",
@@ -54,6 +54,49 @@
                 "response"
             ],
             "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "ql/uri-template",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/QuickenLoans/uri-template.git",
+                "reference": "4b6b5cf150625ef0274ffa45b0588416ae545c65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/QuickenLoans/uri-template/zipball/4b6b5cf150625ef0274ffa45b0588416ae545c65",
+                "reference": "4b6b5cf150625ef0274ffa45b0588416ae545c65",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "QL\\UriTemplate": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Nagi",
+                    "email": "mattnagi@quickenloans.com"
+                }
+            ],
+            "description": "An implementation of RFC 6570 level 4",
+            "homepage": "https://github.com/QuickenLoans/uri-template",
+            "time": "2013-08-28 18:35:46"
         }
     ],
     "packages-dev": [

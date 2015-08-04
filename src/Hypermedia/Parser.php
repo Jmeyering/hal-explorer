@@ -8,8 +8,8 @@ use Psr\Http\Message\ResponseInterface;
  * The Parser reads links, embedded resources, and curies from a
  * {@link http://www.php-fig.org/psr/psr-7/ PSR7 ResponseInterface}
  * This class assumes a response actually implements the
- * {@link http://stateless.co/hal_specification.html HAL Spec} correctly.
- * Malformed/Incorrectly imeplemented response bodies be warned.
+ * {@link https://tools.ietf.org/html/draft-kelly-json-hal-07 HAL Spec}
+ * correctly.  Malformed/Incorrectly imeplemented responses be warned.
  *
  * @author Jared Meyering
  *
