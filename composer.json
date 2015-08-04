@@ -1,0 +1,30 @@
+{
+    "name": "jmeyering/hal-explorer",
+    "description": "HalExplorer is a php client for exploring the HAL Hateoas apis. HalExplorer is able to craft requests and follow links to resource relationships.",
+    "authors": [
+        {
+            "name": "Jared Meyering",
+            "email": "jared.meyering@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.2",
+        "apigen/apigen": "^4.1",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HalExplorer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HalExplorer\\Tests\\": "tests/"
+        }
+    }
+}

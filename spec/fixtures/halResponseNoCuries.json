@@ -1,0 +1,29 @@
+{
+    "id": 123,
+    "information": "here",
+    "_links": {
+        "relation": {
+            "title": "A relationship link",
+            "href": "/relationship/456"
+        },
+        "doc:association": {
+            "title": "another relationship",
+            "href": "/association/789"
+        },
+        "self": {
+            "title": "A Self Referencing Link",
+            "href": "/self/123"
+        }
+    },
+    "_embedded": {
+        "relation": {
+            "this": "is an embedded relationship",
+            "id": 456,
+            "_links": {
+                "self": {
+                    "href": "/relationship/456"
+                }
+            }
+        }
+    }
+}

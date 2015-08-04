@@ -1,0 +1,4 @@
+suites:
+    hal-explorer_suite:
+        namespace: HalExplorer
+        psr4_prefix: HalExplorer
