@@ -1,6 +1,6 @@
 {
     "name": "jmeyering/hal-explorer",
-    "description": "HalExplorer is a php client for exploring the HAL Hateoas apis. HalExplorer is able to craft requests and follow links to resource relationships.",
+    "description": "HalExplorer is a php client for exploring HAL Hateoas apis. HalExplorer is able to craft requests and follow links to resource relationships.",
     "authors": [
         {
             "name": "Jared Meyering",
