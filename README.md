@@ -42,7 +42,7 @@ $explorer->createRelation($object, "association");
 ```
 
 ## Example
-We will use the [heroku haltalk][2] api as an endpoint example and
+We will use the [haltalk][2] api as an endpoint example and
 guzzlehttp/guzzle for our HTTP Client.
 
 ```php
