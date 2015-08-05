@@ -34,7 +34,7 @@ Fetching, Creating, Updating, and Deleting are the primary actions to perform on
 a related object. HalExplorer exposes this functionality with the
 `getRelation`, `createRelation`, `updateRelation`, and `deleteRelation` methods.
 
-As expected, these methods map to `GET`, `POST`, `UPDATE`, and `DELETE` HTTP
+As expected, these methods map to `GET`, `POST`, `PUT`, and `DELETE` HTTP
 methods.
 
 ```php
