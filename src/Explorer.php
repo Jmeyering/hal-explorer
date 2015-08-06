@@ -212,7 +212,7 @@ class Explorer
             throw new LinkNotFoundException("Link \"{$id}\" not found in response");
         }
 
-        if (property_exists($link, "deprecated")) {
+        if (property_exists($link, "deprecation")) {
             throw new DeprecatedLinkException("{$id} link has been deprecated, see {$link->deprecated} for more information");
         }
 
