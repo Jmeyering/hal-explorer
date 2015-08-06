@@ -13,9 +13,9 @@ The codebase is fully covered by phpspec and extensively documented.
 ## Install
 `composer require jmeyering/hal-explorer`
 
-## Spec Tests
-Phpspec is included with the composer deps so running the test suite simply
-involves `vendor/bin/phpspec run`.
+##Docs
+
+[readthedocs](http://hal-explorer.readthedocs.org/en/latest/)
 
 ## Api Documentation
 To generate api documentation use whatever phpdoc generation tool you want
