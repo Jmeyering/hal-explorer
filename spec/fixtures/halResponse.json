@@ -24,6 +24,11 @@
         "templated": {
             "title": "A templated Link",
             "href": "/place/{name}"
+        },
+        "old-link": {
+            "title": "A old and deprecated Link",
+            "href": "/oldplace",
+            "deprecated": "http://more-information.com"
         }
     },
     "_embedded": {

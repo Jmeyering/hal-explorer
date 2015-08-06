@@ -2,10 +2,11 @@
 
 namespace HalExplorer;
 
-use HalExplorer\Hypermedia\Parser as HypermediaParser;
-use HalExplorer\Hypermedia\UriTemplate;
 use HalExplorer\ClientAdapters\ClientAdapterInterface;
 use HalExplorer\Exceptions\LinkNotFoundException;
+use HalExplorer\Exceptions\DeprecatedLinkException;
+use HalExplorer\Hypermedia\Parser as HypermediaParser;
+use HalExplorer\Hypermedia\UriTemplate;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -195,7 +196,10 @@ class Explorer
      * @param string            $id       The identifier of the link
      * @param array             $options  Array of options that will be passed
      *                                    to the adapter
-     * @throws LinkNotFoundException
+     *
+     * @throws LinkNotFoundException   If the link we want to follow doesn't exist
+     *                                 on the response
+     * @throws DeprecatedLinkException If the link has been marked as deprecated
      *
      * @return ResponseInterface
      */
@@ -206,6 +210,10 @@ class Explorer
 
         if ($link === null) {
             throw new LinkNotFoundException("Link \"{$id}\" not found in response");
+        }
+
+        if (property_exists($link, "deprecated")) {
+            throw new DeprecatedLinkException("{$id} link has been deprecated, see {$link->deprecated} for more information");
         }
 
         $href = $link->href;

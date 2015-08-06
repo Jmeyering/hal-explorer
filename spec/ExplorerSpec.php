@@ -113,6 +113,20 @@ class ExplorerSpec extends ObjectBehavior
         $this->getRelation($response, "relation");
     }
 
+    function it_should_throw_an_exception_on_a_deprecated_link(
+        AdapterInterface $adapter,
+        ResponseInterface $response
+    )
+    {
+        $this->setBaseUrl($this->baseUrl);
+
+        $this->setAdapter($adapter);
+        $response->getBody()->willReturn(file_get_contents(__DIR__ . "/fixtures/halResponse.json"));
+
+        $this->shouldThrow("HalExplorer\Exceptions\DeprecatedLinkException")
+            ->during("getRelation", [$response, "old-link"]);
+    }
+
     function it_should_be_able_to_create_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
         ResponseInterface $response
