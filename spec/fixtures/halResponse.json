@@ -28,7 +28,7 @@
         "old-link": {
             "title": "A old and deprecated Link",
             "href": "/oldplace",
-            "deprecated": "http://more-information.com"
+            "deprecation": "http://more-information.com"
         }
     },
     "_embedded": {

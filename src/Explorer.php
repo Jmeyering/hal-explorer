@@ -213,7 +213,7 @@ class Explorer
         }
 
         if (property_exists($link, "deprecation")) {
-            throw new DeprecatedLinkException("{$id} link has been deprecated, see {$link->deprecated} for more information");
+            throw new DeprecatedLinkException("{$id} link has been deprecated, see {$link->deprecation} for more information");
         }
 
         $href = $link->href;
