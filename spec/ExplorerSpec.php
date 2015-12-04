@@ -127,6 +127,25 @@ class ExplorerSpec extends ObjectBehavior
             ->during("getRelation", [$response, "old-link"]);
     }
 
+    function it_should_set_the_proper_accept_header_when_the_type_property_is_declared(
+        AdapterInterface $adapter,
+        ResponseInterface $response
+    )
+    {
+        $expected = [
+            "Content-Type" => "application/json",
+            "Accept" => "application/json",
+        ];
+        $this->setBaseUrl($this->baseUrl);
+
+        $this->setAdapter($adapter);
+        $adapter->get(Argument::type("string"), Argument::withEntry("headers", $expected))->shouldBeCalled();
+
+        $response->getBody()->willReturn(file_get_contents(__DIR__ . "/fixtures/halResponse.json"));
+
+        $this->getRelation($response, "typedeclared");
+    }
+
     function it_should_be_able_to_create_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
         ResponseInterface $response

@@ -216,7 +216,20 @@ class Explorer
             throw new DeprecatedLinkException("{$id} link has been deprecated, see {$link->deprecation} for more information");
         }
 
+        /**
+         * This allows a specifically declared type property to be se on the HAL
+         * endpoint, and will set the Accept header appropriately.
+         */
+        if (property_exists($link, "type")) {
+            $this->setDefaults(function($defaults) use ($link) {
+                $defaults["headers"]["Accept"] = $link->type;
+
+                return $defaults;
+            });
+        }
+
         $href = $link->href;
+
         if (property_exists($link, "templated") && $link->templated) {
             $uriTemplate = new UriTemplate();
             $href = $uriTemplate->template($href, $options["template"]);
@@ -258,9 +271,9 @@ class Explorer
      *
      * @return self
      */
-    public function setDefaults(\Closure $auth)
+    public function setDefaults(\Closure $def)
     {
-        $this->defaults = $auth;
+        $this->defaults = $def;
 
         return $this;
     }

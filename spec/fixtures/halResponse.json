@@ -21,6 +21,11 @@
             "title": "A Self Referencing Link",
             "href": "/self/123"
         },
+        "typedeclared": {
+            "title": "A link that has declared a specific type",
+            "href": "/self/123",
+            "type": "application/json"
+        },
         "templated": {
             "title": "A templated Link",
             "href": "/place/{name}"
