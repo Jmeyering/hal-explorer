@@ -34,7 +34,7 @@ abstract class AbstractAdapter
     /**
      * Returns the set client
      *
-     * @param mixed
+     * @return mixed
      */
     public function getClient()
     {

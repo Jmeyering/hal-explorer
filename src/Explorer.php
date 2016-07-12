@@ -2,7 +2,7 @@
 
 namespace HalExplorer;
 
-use HalExplorer\ClientAdapters\ClientAdapterInterface;
+use HalExplorer\ClientAdapters\AdapterInterface;
 use HalExplorer\Exceptions\LinkNotFoundException;
 use HalExplorer\Exceptions\DeprecatedLinkException;
 use HalExplorer\Hypermedia\Parser as HypermediaParser;
@@ -43,14 +43,14 @@ class Explorer
     /**
      * The adapter to be used to make all requests to the HAL api
      *
-     * @var ClientAdapterInterface
+     * @var AdapterInterface
      */
     protected $adapter;
 
     /**
      * How to add default values to the currently established
      *
-     * @var Closure
+     * @var \Closure
      */
     protected $defaults;
 
@@ -58,6 +58,8 @@ class Explorer
     /**
      * Make a request to the entrypoint of the api.
      *
+     * @see makeRequest
+     * @param array $options See self::makeRequest for details.
      * @return ResponseInterface
      */
     public function enter(array $options = [])
@@ -76,11 +78,11 @@ class Explorer
      * @param array  $options An array of options. We use
      *     {@link http://guzzle.readthedocs.org/en/latest/request-options.html guzzle formatted}
      *     options and require adapters to morph this data to match their
-     *     specific http client implementataions
+     *     specific http client implementations
      *
      * @return ResponseInterface
      */
-    public function makeRequest($method, $uri, $options = [])
+    public function makeRequest($method, $uri, array $options = [])
     {
         //Trim leading slash if it exists
         $uri = ltrim($uri, "/");
@@ -99,7 +101,7 @@ class Explorer
             $options["query"] = isset($options["query"]) ? $options["query"] + $query : $query;
         }
 
-        //Passed in options take presedence over default options.
+        //Passed in options take precedence over default options.
         $options = array_merge_recursive($this->getDefaults(), $options);
 
         $response = $this->getAdapter()->$method($this->getBaseUrl() . "/" . $path, $options);
@@ -112,7 +114,7 @@ class Explorer
      *
      * @param ResponseInterface $response
      *
-     * @return array|stdClass
+     * @return array|\stdClass
      */
     public function getParsedBody(ResponseInterface $response)
     {
@@ -241,7 +243,7 @@ class Explorer
     /**
      * Get adapter
      *
-     * @return ClientAdapterInterface
+     * @return AdapterInterface
      */
     public function getAdapter()
     {
@@ -251,7 +253,7 @@ class Explorer
     /**
      * Set adapter.
      *
-     * @param $adapter ClientAdapterInterface
+     * @param $adapter AdapterInterface
      *
      * @return self
      */
@@ -265,9 +267,9 @@ class Explorer
     /**
      * Modify the existing defaults array. To meet your needs.
      *
-     * @param Closure the closure should accept a single array paramater which
+     * @param \Closure $def The closure should accept a single array parameter which
      * is the library default options array for the http request. Modify it or
-     * trash it I don't care.
+     * trash it -- I don't care.
      *
      * @return self
      */
