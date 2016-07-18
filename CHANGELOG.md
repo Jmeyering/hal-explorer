@@ -1,4 +1,6 @@
 # CHANGELOG
+## 1.2.1
+* Fix some doctype and namespace issues
 
 ## 1.2.0
 * Following [type](https://tools.ietf.org/html/draft-kelly-json-hal-07#section-5.3)
