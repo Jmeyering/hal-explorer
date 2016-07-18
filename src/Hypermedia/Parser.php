@@ -22,7 +22,7 @@ class Parser
      *
      * @param ResponseInterface $response
      *
-     * @return stdClass|array stdClass if a single response, array of stdClass
+     * @return \stdClass|array stdClass if a single response, array of stdClass
      * for a collection
      */
     public function parseJsonBody(ResponseInterface $response)
@@ -47,7 +47,7 @@ class Parser
      *
      * @param ResponseInterface $response
      *
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public function getLinks(ResponseInterface $response)
     {
@@ -78,7 +78,7 @@ class Parser
      * @param ResponseInterface $response The response containing the links.
      * @param string            $id       The identifier of the link to fetch
      *
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public function getLink(ResponseInterface $response, $id)
     {
@@ -116,7 +116,7 @@ class Parser
      *
      * @param ResponseInterface $response The response containing the Embeds.
      *
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public function getEmbeds(ResponseInterface $response)
     {
@@ -146,7 +146,7 @@ class Parser
      * @param ResponseInterface $response The response containing the embeds.
      * @param string            $id       The identifier of the embed to fetch
      *
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public function getEmbed(ResponseInterface $response, $id)
     {
@@ -201,7 +201,7 @@ class Parser
      * @param ResponseInterface $response The response with the curies
      * @param string            $name     The name value of the curie to fetch
      *
-     * @return stdClass|null
+     * @return \stdClass|null
      */
     public function getCurie(ResponseInterface $response, $name)
     {
@@ -234,7 +234,7 @@ class Parser
      * @param ResponseInterface $response The response to check for the property
      * @param string            $id       The id to return.
      *
-     * @return stdClass|array|null
+     * @return \stdClass|array|null
      */
     protected function getResponseProperty(ResponseInterface $response, $id)
     {

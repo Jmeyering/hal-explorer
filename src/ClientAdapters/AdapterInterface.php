@@ -53,7 +53,7 @@ interface AdapterInterface
     /**
      * Make a post request
      *
-     * @param string $uri     The uri that the client will hit
+     * @param string $url     The uri that the client will hit
      * @param array  $options All options that should be handled by the client.
      *
      * @return ResponseInterface
