@@ -232,7 +232,17 @@ class Explorer
 
         $href = $link->href;
 
-        if (property_exists($link, "templated") && $link->templated) {
+        // Technically an api must expose the "templated" property on a link for
+        // it to be considered a uri template. However, I've rarely seen this
+        // used in practice, so first, check for the templated property, but if
+        // it doesn't exist, we will still template if the user has passesd in
+        // the template option.
+        //
+        // @TODO: Better document this functionality
+        if (
+            (property_exists($link, "templated") && $link->templated) ||
+            isset($options["template"])
+        ) {
             $uriTemplate = new UriTemplate();
             $href = $uriTemplate->template($href, $options["template"]);
         }
