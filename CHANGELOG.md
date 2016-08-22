@@ -1,4 +1,9 @@
 # CHANGELOG
+
+## 1.2.2
+* Update the explorer to handle links that are templated but do not contain the
+`templated` property.
+
 ## 1.2.1
 * Fix some doctype and namespace issues
 
