@@ -178,6 +178,22 @@ class ExplorerSpec extends ObjectBehavior
         $this->updateRelation($response, "relation");
     }
 
+    function it_should_be_able_to_update_a_relation_identified_by_a_link_using_patch(
+        AdapterInterface $adapter,
+        ResponseInterface $response
+    )
+    {
+        $this->setBaseUrl($this->baseUrl);;
+
+        $this->setAdapter($adapter);
+        $adapter->patch($this->baseUrl . "/relationship/456", Argument::type("array"))
+            ->shouldBeCalled();
+
+        $response->getBody()->willReturn(file_get_contents(__DIR__ . "/fixtures/halResponse.json"));
+
+        $this->patchUpdateRelation($response, "relation");
+    }
+
     function it_should_be_able_to_delete_a_relation_identified_by_a_link(
         AdapterInterface $adapter,
         ResponseInterface $response

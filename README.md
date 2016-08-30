@@ -31,12 +31,13 @@ used internally must return PSR7 Message interfaces.
 To use the exploration feature of the library we need to think about our
 responses and their included `_links` as objects and relationships.
 
-Fetching, Creating, Updating, and Deleting are the primary actions to perform on
-a related object. HalExplorer exposes this functionality with the
-`getRelation`, `createRelation`, `updateRelation`, and `deleteRelation` methods.
+Fetching, Creating, Updating, and Deleting are the primary actions to perform
+on a related object. HalExplorer exposes this functionality with the
+`getRelation`, `createRelation`, `updateRelation`, `patchUpdateRelation` and
+`deleteRelation` methods.
 
-As expected, these methods map to `GET`, `POST`, `PUT`, and `DELETE` HTTP
-methods.
+As expected, these methods map to the `GET`, `POST`, `PUT`, `PATCH` and
+`DELETE` HTTP verbs.
 
 ```php
 $explorer->createRelation($object, "association");

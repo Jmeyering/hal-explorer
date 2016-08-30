@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.3.0
+* Add the `patchUpdateRelation` method to the explorer to support partial object
+updates.
+* Update `AbstractAdapter::setClient()` to return self.
+
 ## 1.2.2
 * Update the explorer to handle links that are templated but do not contain the
 `templated` property.

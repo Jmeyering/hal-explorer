@@ -1,19 +1,20 @@
 # Api Exploration
 
-HalExplorer is able to traverse links that exist on a PSR-7 Response. HalExplorer
-expects the response body to be correctly formatted according to the
-[HAL draft][0]. Malformed response bodies will not be traversed correctly.
+HalExplorer is able to traverse links that exist on a PSR-7 Response.
+HalExplorer expects the response body to be correctly formatted according to
+the [HAL draft][0]. Malformed response bodies will not be traversed correctly.
 
 To use the exploration feature of the library we need to think about our
 responses and their included `_links`, and `_embedded` as objects and their
 relationships.
 
-Fetching, Creating, Updating, and Deleting are the primary actions to perform on
-a related object. HalExplorer exposes this functionality with the
-`getRelation`, `createRelation`, `updateRelation`, and `deleteRelation` methods.
+Fetching, Creating, Updating, and Deleting are the primary actions to perform
+on a related object. HalExplorer exposes this functionality with the
+`getRelation`, `createRelation`, `updateRelation`, `patchUpdateRelation` and
+`deleteRelation` methods.
 
-As expected, these methods map to `GET`, `POST`, `PUT`, and `DELETE` HTTP
-methods.
+As expected, these methods map to `GET`, `POST`, `PUT`, `PATCH` and `DELETE`
+HTTP verbs.
 
 For example, given the following response:
 

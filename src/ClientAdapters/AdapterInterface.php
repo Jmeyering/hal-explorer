@@ -29,7 +29,7 @@ interface AdapterInterface
      *
      * @param mixed
      *
-     * @return void
+     * @return self
      */
     public function setClient($client);
 
@@ -69,6 +69,16 @@ interface AdapterInterface
      * @return ResponseInterface
      */
     public function put($uri, array $options = []);
+
+    /**
+     * Make a patch request
+     *
+     * @param string $uri     The uri that the client will hit
+     * @param array  $options All options that should be handled by the client.
+     *
+     * @return ResponseInterface
+     */
+    public function patch($uri, array $options = []);
 
     /**
      * Make a delete request

@@ -172,6 +172,22 @@ class Explorer
     }
 
     /**
+     * Follow a link using the "PATCH" method.
+     *
+     * @see followLink
+     *
+     * @param ResponseInterface $response The response object containing the links
+     * @param string            $id       The identifier of the link to follow
+     * @param array             $options  Any options to be passed to the adapter
+     *
+     * @return ResponseInterface
+     */
+    public function patchUpdateRelation(ResponseInterface $response, $id, array $options = [])
+    {
+        return $this->followLink("patch", $response, $id, $options);
+    }
+
+    /**
      * Follow a link using the "DELETE" method.
      *
      * @see followLink

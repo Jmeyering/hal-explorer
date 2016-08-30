@@ -25,10 +25,14 @@ abstract class AbstractAdapter
      * Sets the concrete client onto the adapter
      *
      * @param mixed $client
+     *
+     * @return self
      */
     public function setClient($client)
     {
         $this->client = $client;
+
+        return $this;
     }
 
     /**
