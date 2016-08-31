@@ -64,6 +64,20 @@ class Adapter extends AbstractAdapter implements AdapterInterface
     }
 
     /**
+     * Perform a patch request
+     *
+     * @param string $uri
+     * @param array  $options All options for the request, will be passed to the
+     * client
+     *
+     * @return ResponseInterface
+     */
+    public function patch($uri = null, array $options = [])
+    {
+        return $this->getClient()->patch($uri, $options);
+    }
+
+    /**
      * Perform a delete request
      *
      * @param string $uri
