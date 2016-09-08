@@ -50,6 +50,42 @@ class ExplorerSpec extends ObjectBehavior
         }
     }
 
+    function it_should_be_able_to_make_requests_to_an_absolute_url(AdapterInterface $adapter)
+    {
+
+        $url = "http://example.com/resource";
+        $this->setAdapter($adapter);
+        $adapter->get($url, Argument::type("array"))->shouldBeCalled();
+        $this->makeRequest("get", $url);
+    }
+
+    function it_should_be_able_to_make_requests_to_an_relative_url(AdapterInterface $adapter)
+    {
+
+        $url = "resource";
+        $this->setAdapter($adapter);
+        $adapter->get("/resource", Argument::type("array"))->shouldBeCalled();
+        $this->makeRequest("get", $url);
+    }
+
+    function it_should_be_able_to_make_requests_to_an_relative_url_with_query_params(AdapterInterface $adapter)
+    {
+
+        $url = "resource?test=1&param=test";
+        $this->setAdapter($adapter);
+        $adapter->get("/resource", Argument::type("array"))->shouldBeCalled();
+        $this->makeRequest("get", $url);
+    }
+
+    function it_should_be_able_to_make_requests_to_an_absolute_url_with_query_params(AdapterInterface $adapter)
+    {
+
+        $url = "http://example.com/resource?test=1&value=hello";
+        $this->setAdapter($adapter);
+        $adapter->get("http://example.com/resource", Argument::type("array"))->shouldBeCalled();
+        $this->makeRequest("get", $url);
+    }
+
     function it_should_be_able_to_set_defaults_via_the_auth_closure(AdapterInterface $adapter)
     {
 

@@ -74,7 +74,8 @@ class Explorer
      * @todo Really dry this up. This is a CRAPpy method.
      *
      * @param string $method  The method used to make the request
-     * @param string $uri     The uri to hit
+     * @param string $uri     The uri to hit, may be absolute or relative to the
+     *     baseUrl
      * @param array  $options An array of options. We use
      *     {@link http://guzzle.readthedocs.org/en/latest/request-options.html guzzle formatted}
      *     options and require adapters to morph this data to match their
@@ -89,7 +90,11 @@ class Explorer
 
         $parsed = parse_url($uri);
 
-        $path = $parsed["path"];
+        // If this is not an absolute URI we need to generate the fully qualified
+        // internal url using the base url that we have internally.
+        if (!isset($parsed["scheme"]) && isset($parsed["path"])) {
+            $uri = $this->getBaseUrl() . "/" . $uri;
+        }
 
         // If the link href has query parameters we want to split those out and
         // send them appropriately. Maybe dry this up a bit later when
@@ -99,12 +104,16 @@ class Explorer
             parse_str($parsed["query"], $query);
 
             $options["query"] = isset($options["query"]) ? $options["query"] + $query : $query;
+
+            // Because we pass the query string as an $option parameter. Remove it
+            // from the uri we are requesting.
+            $uri = preg_replace('/\?.*/', '', $uri);
         }
 
         //Passed in options take precedence over default options.
         $options = array_merge_recursive($this->getDefaults(), $options);
 
-        $response = $this->getAdapter()->$method($this->getBaseUrl() . "/" . $path, $options);
+        $response = $this->getAdapter()->$method($uri, $options);
 
         return $response;
     }
