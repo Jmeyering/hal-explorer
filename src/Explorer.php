@@ -5,6 +5,7 @@ namespace HalExplorer;
 use HalExplorer\ClientAdapters\AdapterInterface;
 use HalExplorer\Exceptions\LinkNotFoundException;
 use HalExplorer\Exceptions\DeprecatedLinkException;
+use HalExplorer\Hypermedia\ParserInterface;
 use HalExplorer\Hypermedia\Parser as HypermediaParser;
 use HalExplorer\Hypermedia\UriTemplate;
 use Psr\Http\Message\ResponseInterface;
@@ -46,6 +47,13 @@ class Explorer
      * @var AdapterInterface
      */
     protected $adapter;
+
+    /**
+     * The parser that will process all HAL links, embeds, and curies.
+     *
+     * @var ParserInterface
+     */
+    protected $parser;
 
     /**
      * How to add default values to the currently established
@@ -127,9 +135,8 @@ class Explorer
      */
     public function getParsedBody(ResponseInterface $response)
     {
-        $parser = new HypermediaParser();
 
-        return $parser->parseJsonBody($response);
+        return json_decode($response->getBody());
     }
 
     /**
@@ -232,7 +239,7 @@ class Explorer
      */
     protected function followLink($method, ResponseInterface $response, $id, array $options = [])
     {
-        $hypermediaParser = new HypermediaParser();
+        $hypermediaParser = $this->getParser();
         $link = $hypermediaParser->getLink($response, $id);
 
         if ($link === null) {
@@ -298,6 +305,34 @@ class Explorer
 
         return $this;
     }
+
+    /**
+     * Set the hypermedia parser
+     *
+     * @param $parser ParserInterface
+     *
+     * @return self
+     */
+    public function setParser(ParserInterface $parser) {
+        $this->parser = $parser;
+
+        return $this;
+    }
+
+    /**
+     * Retrieve the set parser on the explorer, or return the default parser.
+     *
+     * @return ParserInterface
+     */
+    public function getParser() {
+        $parser = $this->parser;
+        if (is_null($this->parser)) {
+            $parser = new HypermediaParser();
+        }
+
+        return $parser;
+    }
+
 
     /**
      * Modify the existing defaults array. To meet your needs.

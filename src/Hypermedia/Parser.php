@@ -2,6 +2,7 @@
 
 namespace HalExplorer\Hypermedia;
 
+use HalExplorer\Hypermedia\ParserInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -10,25 +11,14 @@ use Psr\Http\Message\ResponseInterface;
  * This class assumes a response actually implements the
  * {@link https://tools.ietf.org/html/draft-kelly-json-hal-07 HAL Spec}
  * correctly.  Malformed/Incorrectly imeplemented responses be warned.
+ * If you need non-standard functionality, you can implement the
+ * {@see ParserInterface} for your own use cases.
  *
  * @author Jared Meyering
  *
  */
-class Parser
+class Parser implements ParserInterface
 {
-
-    /**
-     * Parses a json message body and returns the result
-     *
-     * @param ResponseInterface $response
-     *
-     * @return \stdClass|array stdClass if a single response, array of stdClass
-     * for a collection
-     */
-    public function parseJsonBody(ResponseInterface $response)
-    {
-        return json_decode($response->getBody());
-    }
 
     /**
      * Does the ResponseInterface have any links?
@@ -243,4 +233,16 @@ class Parser
             null;
     }
 
+    /**
+     * Parses a json message body and returns the result
+     *
+     * @param ResponseInterface $response
+     *
+     * @return \stdClass|array stdClass if a single response, array of stdClass
+     * for a collection
+     */
+    protected function parseJsonBody(ResponseInterface $response)
+    {
+        return json_decode($response->getBody());
+    }
 }

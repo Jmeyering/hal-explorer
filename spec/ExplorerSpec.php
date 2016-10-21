@@ -6,6 +6,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
 use HalExplorer\ClientAdapters\AdapterInterface;
+use HalExplorer\Hypermedia\ParserInterface;
 use HalExplorer\Exceptions\LinkNotFoundException;
 
 class ExplorerSpec extends ObjectBehavior
@@ -23,6 +24,18 @@ class ExplorerSpec extends ObjectBehavior
     {
         $this->setAdapter($clientAdapter);
         $this->getAdapter()->shouldBeEqualTo($clientAdapter);
+    }
+
+    function it_should_return_the_default_parser_if_none_was_set(ParserInterface $parser)
+    {
+        $this->getParser()->shouldReturnAnInstanceOf("\HalExplorer\Hypermedia\Parser");
+
+    }
+
+    function it_should_set_and_retreive_a_parser(ParserInterface $parser)
+    {
+        $this->setParser($parser);
+        $this->getParser()->shouldBeEqualTo($parser);
     }
 
     function it_should_set_and_retreive_a_base_url()

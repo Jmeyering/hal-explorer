@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.5.0
+*  Allow the hypermedia parser to be set manually, this provides support for
+custom use cases where HAL API's don't completely follow the specification
+but are close enough that this library would still be helpful.
+Added ParserInterface to facilitate this.
+
+## 1.4.0
+*  Allow for parsing absolute URL's correctly within makeRequest.
+
 ## 1.3.0
 * Add the `patchUpdateRelation` method to the explorer to support partial object
 updates.

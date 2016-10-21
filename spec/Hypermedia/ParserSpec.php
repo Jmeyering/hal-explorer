@@ -5,9 +5,15 @@ namespace spec\HalExplorer\Hypermedia;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
+use HalExplorer\Hypermedia\Parser;
 
 class ParserSpec extends ObjectBehavior
 {
+    function it_should_implement_the_abstract_parser(Parser $parser)
+    {
+        $this->shouldImplement("\HalExplorer\Hypermedia\ParserInterface");
+    }
+
     function it_should_know_if_a_response_has_links_or_not(ResponseInterface $response)
     {
         $response->getBody()->willReturn(file_get_contents(__DIR__ . "/../fixtures/halResponse.json"));
