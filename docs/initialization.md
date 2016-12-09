@@ -7,7 +7,7 @@ on the explorer. A simple initialization using the default adapter and the
 ```php
 use GuzzleHttp\Client;
 use HalExplorer\Explorer;
-use HalExplorer\ClientAdapter\Adapter;
+use HalExplorer\ClientAdapters\Adapter;
 
 $client = new Client();
 $explorer = new Explorer();

@@ -17,7 +17,7 @@ and the default adapter works wonderfully with that package.
 ```php
 // Using the default adapter with Guzzle 6
 use GuzzleHttp\Client;
-use HalExplorer\ClientAdapter\Adapter;
+use HalExplorer\ClientAdapters\Adapter;
 
 $client = new Client();
 $adapter = new Adapter();
