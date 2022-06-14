@@ -58,7 +58,12 @@ class Parser implements ParserInterface
             return false;
         }
 
-        return property_exists($this->getLinks($response), $id) ? true : false;
+        $links = $this->getLinks($links);
+        if (empty($links)) {
+            return false;
+        }
+ 
+        return property_exists($links, $id) ? true : false;
     }
 
     /**
@@ -127,7 +132,12 @@ class Parser implements ParserInterface
             return false;
         }
 
-        return property_exists($this->getEmbeds($response), $id) ? true : false;
+        $embeds = $this->getEmbeds($response);
+        if (empty($embeds)) {
+            return false;
+        }
+
+        return property_exists($embeds, $id) ? true : false;
     }
 
     /**
@@ -215,7 +225,12 @@ class Parser implements ParserInterface
      */
     protected function responseHasProperty(ResponseInterface $response, $id)
     {
-        return property_exists($this->parseJsonBody($response), $id);
+        $body = $this->parseJsonBody($response);
+        if (empty($body)) {
+            return false;
+        }
+
+        return property_exists($body, $id);
     }
 
     /**
